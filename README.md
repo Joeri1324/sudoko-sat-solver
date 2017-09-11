@@ -9,5 +9,8 @@ Soduko problem instances are transformed to sat instances and subsequently solve
 ## To do
 - Encode sudoku into sat
 - Implement sat solver (https://github.com/ContinuumIO/pycosat) check if there is a paper.
+- Find more papers
 
+## Papers
+- 
 
