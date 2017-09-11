@@ -5,3 +5,7 @@ Soduko problem instances are transformed to sat instances and subsequently solve
  Posibillities:
  - Is the relative amount of givens a valid predictor for the computational hardness of a sudoko puzzle.
  - Is the distribution of amount of givens a valid predictor for the computational hardness of a sudoku puzzle.
+
+## To do
+- Encode sudoku into sat
+- Implement sat solver
