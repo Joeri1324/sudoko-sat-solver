@@ -94,7 +94,10 @@ class SudoGenerator(object):
         table_copy = self.table.copy()
         given = []
         for i in range(0, n):
-            given.append([random.randint(0, 8), random.randint(0, 8)])
+            index = [random.randint(0, 8), random.randint(0, 8)]
+            while index in given:
+                index = [random.randint(0, 8), random.randint(0, 8)]
+            given.append(index)
         for i in range(0, 9):
             for j in range(0, 9):
                 if not ([i, j] in given):
@@ -120,11 +123,11 @@ class SudoGenerator(object):
         file.close()
 
 
-path = "/home/mas/Desktop/dataset/"
+path = "data/"
 gen = SudoGenerator()
 for n in range(1, 81):
-    print(n)
+
     if not os.path.exists(path+str(n)+"/"):
-        os.mkdir(path+str(n)+"/")
+        os.mkdir(path+str(n))
     for i in range(100):
         gen.get_next(n, path=path+str(n)+"/", counter=i, write=True)
