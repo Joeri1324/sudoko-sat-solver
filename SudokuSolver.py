@@ -92,12 +92,38 @@ class SudokuSolver(object):
     def solve(self, sudoku):
         return [x for x in pycosat.solve(self.get_rules(9) + sudoku) if x > 0]
 
+    def dataset_pars(self,filename):
+        x = 1
+        temp_sudo = []
+        with open(filename, "r") as fileobj:
+            for line in fileobj:
+                y = 1
+                for ch in range(len(line) - 1):
+                    if line[ch] != '0':
+                        temp_sudo.append(str(x) + str(y) + line[ch])#['223', '337', '342', '393', '584', '659', '683', '734', '773', '788']
+                    y += 1
+                x += 1
+
+        ready_to_solve = [[int(ch)] for ch in temp_sudo]#[[223], [337], [342], [393], [584], [659], [683], [734], [773], [788]]
+        return ready_to_solve
+
+
 def main():
-    sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441], 
-              [843], [554], [655], [757], [265], [667], [277], [579], [772],
-              [383], [486], [198]]
+
     solver = SudokuSolver()
-    print(solver.solve(sudoku))
+    path = "/home/mas/Desktop/dataset/"
+
+    for n in range(1,81):
+        for i in range(0,100):
+            filename = path + str(n) + "/puzzle_" + str(i) + ".txt"
+            solver_input = dataset_pars(filename)
+            print(solver.solve(sudoku))
+
+'''    sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441], 
+              [843], [554], [655], [757], [265], [667], [277], [579], [772],
+              [383], [486], [198]]'''
+
 
 if __name__ == "__main__":
     main()
+
