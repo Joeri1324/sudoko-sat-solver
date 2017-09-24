@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 def main():
 
     max_given_num = 80
-    samples_num = 3
+    samples_num = 100
     path = "/home/mas/Desktop/sudoko-sat-solver/dataset/"
     path_sol = "/home/mas/Desktop/sudoko-sat-solver/solversolution/"
     path_converted_sol = "/home/mas/Desktop/sudoko-sat-solver/convertedsol/"
