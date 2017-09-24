@@ -3,6 +3,8 @@ import sys
 import math
 import pycosat
 import os
+import time
+
 
 class SudokuSolver(object):
 
@@ -123,10 +125,10 @@ def main():
     solver = SudokuSolver()
     path = "/home/mas/Desktop/dataset/"
     path_sol = "/home/mas/Desktop/solversolution/"
+    compute_time = []
 
     for n in range(80,81):
         for i in range(0,3):
-            solution = []
             if not os.path.exists(path + str(n) + "/"):
                 os.mkdir(path + str(n))
             if not os.path.exists(path_sol + str(n) + "/"):
@@ -136,9 +138,24 @@ def main():
             writefile = path_sol + str(n) + "/sat_solution_" + str(i) + ".txt"
 
             solver_input = dataset_pars(readfile)
+
+            start_time = time.time()
             solution = solver.solve(solver_input)
+            end_time = time.time()
+
+            compute_time.append([n,i,end_time - start_time])
             print("i:",i,"solution:",solution,'\n')
             save_solution(writefile, solution)
+
+    print(compute_time)
+
+
+
+
+
+
+
+
 
 '''    sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441], 
               [843], [554], [655], [757], [265], [667], [277], [579], [772],
