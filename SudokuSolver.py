@@ -92,12 +92,40 @@ class SudokuSolver(object):
     def solve(self, sudoku):
         return [x for x in pycosat.solve(self.get_rules(9) + sudoku) if x > 0]
 
+    def is_proper(self, sudoku):
+        rules = self.get_rules(9) + sudoku
+        sol = pycosat.solve(rules)
+        rules.append([-x for x  in  sol if x > 0])
+        if pycosat.solve(rules) == "UNSAT":
+            return True
+        return False
+
+    def sudoku_to_cnf(self, filename):
+        rules = []
+        with open(filename) as file:
+            i = 9
+            j = 1
+            for line in file:
+                for c in line:
+                    try:
+                        c = int(c)
+                        if c is not 0:
+                            rules.append([int(str(j)+str(i)+str(c))])
+                        j += 1
+                        
+                        if j == 10:
+                            j = 1
+                    except:
+                        pass
+                i -= 1
+        return rules
+
 def main():
     sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441], 
               [843], [554], [655], [757], [265], [667], [277], [579], [772],
               [383], [486], [198]]
     solver = SudokuSolver()
-    print(solver.solve(sudoku))
+    print(solver.is_proper(sudoku))
 
 if __name__ == "__main__":
     main()
