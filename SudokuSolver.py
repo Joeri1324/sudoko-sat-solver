@@ -2,7 +2,7 @@ import itertools
 import sys
 import math
 import pycosat
-
+import os
 
 class SudokuSolver(object):
 
@@ -92,32 +92,53 @@ class SudokuSolver(object):
     def solve(self, sudoku):
         return [x for x in pycosat.solve(self.get_rules(9) + sudoku) if x > 0]
 
-    def dataset_pars(self,filename):
-        x = 1
-        temp_sudo = []
-        with open(filename, "r") as fileobj:
-            for line in fileobj:
-                y = 1
-                for ch in range(len(line) - 1):
-                    if line[ch] != '0':
-                        temp_sudo.append(str(x) + str(y) + line[ch])#['223', '337', '342', '393', '584', '659', '683', '734', '773', '788']
-                    y += 1
-                x += 1
 
-        ready_to_solve = [[int(ch)] for ch in temp_sudo]#[[223], [337], [342], [393], [584], [659], [683], [734], [773], [788]]
-        return ready_to_solve
+def dataset_pars(filename):
+    x = 1
+    temp_sudo = []
+    with open(filename, "r") as fileobj:
+        for line in fileobj:
+            y = 1
+            for ch in range(len(line) - 1):
+                if line[ch] != '0':
+                    temp_sudo.append(str(x) + str(y) + line[ch])#['223', '337', '342', '393', '584', '659', '683', '734', '773', '788']
+                y += 1
+            x += 1
+
+    ready_to_solve = [[int(ch)] for ch in temp_sudo]#[[223], [337], [342], [393], [584], [659], [683], [734], [773], [788]]
+    return ready_to_solve
+
+
+def save_solution(filename, solution):
+    file = open(filename, "w")
+    for obj in solution:
+        file.write(str(obj))
+        file.write(" ")
+    file.write('\n')
+    file.close()
 
 
 def main():
 
     solver = SudokuSolver()
     path = "/home/mas/Desktop/dataset/"
+    path_sol = "/home/mas/Desktop/solversolution/"
 
-    for n in range(1,81):
-        for i in range(0,100):
-            filename = path + str(n) + "/puzzle_" + str(i) + ".txt"
-            solver_input = dataset_pars(filename)
-            print(solver.solve(sudoku))
+    for n in range(80,81):
+        for i in range(0,3):
+            solution = []
+            if not os.path.exists(path + str(n) + "/"):
+                os.mkdir(path + str(n))
+            if not os.path.exists(path_sol + str(n) + "/"):
+                os.mkdir(path_sol + str(n))
+
+            readfile = path + str(n) + "/puzzle_" + str(i) + ".txt"
+            writefile = path_sol + str(n) + "/sat_solution_" + str(i) + ".txt"
+
+            solver_input = dataset_pars(readfile)
+            solution = solver.solve(solver_input)
+            print("i:",i,"solution:",solution,'\n')
+            save_solution(writefile, solution)
 
 '''    sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441], 
               [843], [554], [655], [757], [265], [667], [277], [579], [772],
