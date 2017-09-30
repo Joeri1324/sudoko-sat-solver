@@ -1,3 +1,6 @@
+import re
+import numpy
+import Configs
 def dataset_parse(filename):
     x = 1
     temp_sudo = []
@@ -36,3 +39,53 @@ def save_solution_without_index(filename, solution):
         prev_index = list_of_ints[0]
     file.write('\n')
     file.close()
+
+
+def file_to_list(file):
+    arr = []
+    for line in file:
+        line = line.strip('\n')
+        line = re.sub('[\[\]]', '', line)
+        if line != '':
+            arr = [int(s) for s in line.split(',')]
+    return arr
+
+
+def save_list_in_file(filename, mylist):
+    file = open(filename,"w")
+    for i in range(0,len(mylist)-1):
+        file.write(str(mylist[i])+ ",")
+    file.write(str(mylist[len(mylist)-1]))
+    file.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
