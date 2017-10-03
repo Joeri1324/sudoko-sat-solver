@@ -14,9 +14,11 @@ python3 TestSolverForDataset.py
 python3 statistic.py
 
 #-------------------------------extracting metrics from statistic file, analyzing and plotting them-----------------------------------
+#----------line 59 and 60: Change the pathes to your statistic file's path and path you wish to save the statistical plots------------
 python3 DifficultyFinder.py
 
 
 #====================================================Properness=======================================================================
+#--------------------------------------------line 10: change to the path of your data set---------------------------------------------
 python3 properness_experiment.py
 python3 plot.py
