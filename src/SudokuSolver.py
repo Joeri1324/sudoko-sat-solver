@@ -93,9 +93,35 @@ class SudokuSolver(object):
         ))
 
     def solve(self, sudoku):
-        sudo_out = [x for x in pycosat.solve(self.get_rules(9) + sudoku, verbose=1) if x > 0]
+        return [x for x in pycosat.solve(self.get_rules(9) + sudoku, verbose=1) if x > 0]
 
-        return sudo_out
+    def is_proper(self, sudoku):
+        rules = self.get_rules(9) + sudoku
+        sol = pycosat.solve(rules)
+        rules.append([-x for x  in  sol if x > 0])
+        if pycosat.solve(rules) == "UNSAT":
+            return True
+        return False
+
+    def sudoku_to_cnf(self, filename):
+        rules = []
+        with open(filename) as file:
+            i = 9
+            j = 1
+            for line in file:
+                for c in line:
+                    try:
+                        c = int(c)
+                        if c is not 0:
+                            rules.append([int(str(j)+str(i)+str(c))])
+                        j += 1
+                        
+                        if j == 10:
+                            j = 1
+                    except:
+                        pass
+                i -= 1
+        return rules
 
 def main():
     stat_file = "/home/mas/Desktop/sudoko-sat-solver/solversolution/statistic.txt"
