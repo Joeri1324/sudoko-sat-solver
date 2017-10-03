@@ -10,9 +10,11 @@ python3 TestSolverForDataset.py
 
 #-------------------------------computing the pycosat statistics for the solver and write them in a file------------------------------
 #--------------------------------------------------it imports SudokuIO.py-------------------------------------------------------------
-#-----line 10, 11, 12 and 13: change pathes to the desired one (pathes for reading from data set and writing the solutions in a file)-----
+#---line 10, 11, 12 and 13: change pathes to the desired one (pathes for reading from data set and writing the solutions in a file)---
 python3 statistic.py
 
 #-------------------------------extracting metrics from statistic file, analyzing and plotting them-----------------------------------
 python3 DifficultyFinder.py
 
+
+#====================================================Properness=======================================================================
