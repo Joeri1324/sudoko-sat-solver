@@ -1,4 +1,4 @@
-# sudoko-sat-solverhttp://blog.forret.com/2006/08/14/a-sudoku-challenge-generator/
+# sudoko-sat-solver
 Soduko problem instances are transformed to sat instances and subsequently solved.
 
 # Research Question:
@@ -16,5 +16,4 @@ Soduko problem instances are transformed to sat instances and subsequently solve
 
 ## Papers
 - For generating the sudoku (the valid sudoku formula and algorithm): http://theinf1.informatik.uni-jena.de/publications/sudoku-weller08.pdf
-    
 - https://link.springer.com/content/pdf/10.1007/978-3-540-79719-7_4.pdf
