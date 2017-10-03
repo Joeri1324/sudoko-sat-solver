@@ -43,14 +43,15 @@ def calculate_difficulty_measure(all_givens, metrics_of_intersts):
         max_measure = np.amax(all_measures_np)
         for given in all_givens:
             given_measure_avg = np.mean(np.array(given[metric]))
-            given_measure_score = (given_measure_avg-min_measure)/float(max_measure-min_measure)
-            result[metric].append(given_measure_score)
-    result['total'] = []
-    for i in range(len(result[one_metric])):
+            #given_measure_score = (given_measure_avg-min_measure)/float(max_measure-min_measure)
+            result[metric].append(given_measure_avg)
+            #result[metric].append(given_measure_score)
+   # result['total'] = []
+ '''   for i in range(len(result[one_metric])):
         total_score = 0
         for metric in metrics_of_intersts:
             total_score += result[metric][i] * metrics_of_intersts[metric]
-        result['total'].append(total_score)
+        result['total'].append(total_score)'''
     return result
 
 
@@ -60,9 +61,9 @@ plot_path = "/home/mas/Desktop/sudoko-sat-solver/solversolution/"
 all_givens_stat = parse_statiscis(names, stat_path)
 measure_of_interst = {}
 measure_of_interst["conflicts"] = 0.7
-measure_of_interst["level"] = 0.3
-measure_of_interst["agility"] = 0
-measure_of_interst["learned"] = 0
+#measure_of_interst["level"] = 0.3
+#measure_of_interst["agility"] = 0
+#measure_of_interst["learned"] = 0
 result = calculate_difficulty_measure(all_givens_stat, measure_of_interst)
 number_of_xpoints = len(result[list(result.keys())[0]]) + 1
 number_of_metrics = len(list(result.keys()))
