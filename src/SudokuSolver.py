@@ -2,7 +2,10 @@ import itertools
 import sys
 import math
 import pycosat
-
+import sys
+import time
+import subprocess
+import SudokuIO as io
 
 class SudokuSolver(object):
 
@@ -121,11 +124,19 @@ class SudokuSolver(object):
         return rules
 
 def main():
-    sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441], 
+    stat_file = "/home/mas/Desktop/sudoko-sat-solver/solversolution/statistic.txt"
+
+    sudoku = [[219], [714], [328], [425], [821], [331], [836], [938], [441],
               [843], [554], [655], [757], [265], [667], [277], [579], [772],
               [383], [486], [198]]
+
+
     solver = SudokuSolver()
-    print(solver.solve(sudoku))
+    #start_time = time.process_time()
+    solver.solve(sudoku)
+    # solve the SAT problem
+    #print(str(time.process_time() - start_time).replace('.', ','))
 
 if __name__ == "__main__":
     main()
+

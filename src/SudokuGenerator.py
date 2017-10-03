@@ -3,7 +3,18 @@ import random
 import os
 n = 9 #number of subgrids
 m = 3 #number of main grids
-init_sudoku = np.array([[(((x//m)+(m*(x%m))+y)%n)+1 for y in range(0,9)] for x in range(0,9)])
+init_sudoku = np.array([[1, 7, 2, 5, 4, 9, 6, 8, 3],
+                        [6, 4, 5, 8, 7, 3, 2, 1, 9],
+                        [3, 8, 9, 2, 6, 1, 7, 4, 5],
+                        [4, 9, 6, 3, 2, 7, 8, 5, 1],
+                        [8, 1, 3, 4, 5, 6, 9, 7, 2],
+                        [2, 5, 7, 1, 9, 8, 4, 3, 6],
+                        [9, 6, 4, 7, 1, 5, 3, 2, 8],
+                        [7, 3, 1, 6, 8, 2, 5, 9, 4],
+                        [5, 2, 8, 9, 3, 4, 1, 6, 7]])
+
+
+#np.array([[(((x//m)+(m*(x%m))+y)%n)+1 for y in range(0,9)] for x in range(0,9)])
 
 
 class SudoGenerator(object):
@@ -123,11 +134,11 @@ class SudoGenerator(object):
         file.close()
 
 
-path = "data/"
+path = "/home/mas/Desktop/sudoko-sat-solver/100_hard_dataset/"
 gen = SudoGenerator()
 for n in range(1, 81):
-
     if not os.path.exists(path+str(n)+"/"):
         os.mkdir(path+str(n))
     for i in range(100):
+        print("n,i:", n,i,'\n')
         gen.get_next(n, path=path+str(n)+"/", counter=i, write=True)
