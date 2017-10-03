@@ -18,3 +18,5 @@ python3 DifficultyFinder.py
 
 
 #====================================================Properness=======================================================================
+python3 properness_experiment.py
+python3 plot.py
