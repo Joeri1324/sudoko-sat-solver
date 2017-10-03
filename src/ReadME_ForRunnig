@@ -1,0 +1,18 @@
+#Instruction for running the code
+
+#------------------------------------------------------------generating data----------------------------------------------------------
+#-----------------------------Line 137: you should change the path to an desired path in your compure---------------------------------
+python3 SudokuGenerator.py
+
+#---------------------------------------------------------solving the sudoku----------------------------------------------------------
+#-----line 10, 11 and 12: change pathes to the desired one (pathes for reading from data set and writing the solutions in a file)-----
+python3 TestSolverForDataset.py
+
+#-------------------------------computing the pycosat statistics for the solver and write them in a file------------------------------
+#--------------------------------------------------it imports SudokuIO.py-------------------------------------------------------------
+#-----line 10, 11, 12 and 13: change pathes to the desired one (pathes for reading from data set and writing the solutions in a file)-----
+python3 statistic.py
+
+#-------------------------------extracting metrics from statistic file, analyzing and plotting them-----------------------------------
+python3 DifficultyFinder.py
+
