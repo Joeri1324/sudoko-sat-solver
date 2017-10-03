@@ -90,7 +90,7 @@ class SudokuSolver(object):
         ))
 
     def solve(self, sudoku):
-        return [x for x in pycosat.solve(self.get_rules(9) + sudoku) if x > 0]
+        return [x for x in pycosat.solve(self.get_rules(9) + sudoku, verbose=1) if x > 0]
 
     def is_proper(self, sudoku):
         rules = self.get_rules(9) + sudoku
@@ -125,7 +125,7 @@ def main():
               [843], [554], [655], [757], [265], [667], [277], [579], [772],
               [383], [486], [198]]
     solver = SudokuSolver()
-    print(solver.is_proper(sudoku))
+    print(solver.solve(sudoku))
 
 if __name__ == "__main__":
     main()
